@@ -29,6 +29,8 @@ This project is intentionally designed as an **architecture showcase** and **sys
 8. Merge is used for stabilization  
 9. Monorepo governance, multi‑image runtime  
 10. Quality gates are mandatory, not optional  
+11. **SEO is critically important** — no shortcuts on search optimization
+12. **No shortcuts** — production-grade quality from day one  
 
 ---
 
@@ -57,8 +59,8 @@ Containers = runtime isolation and scalability
 - **SSR**: Symfony backend + Next.js frontend (server-side rendering)
 
 ### Infrastructure Variants
-- Docker Compose
-- Kubernetes
+- Docker Compose (development)
+- Kubernetes (production)
 
 Resulting valid system configurations:
 1. Symfony SSG + Docker Compose
@@ -73,15 +75,21 @@ Resulting valid system configurations:
 Branches represent **architectural decisions**, not features.
 
 ### Core Branches
-- `main` → canonical architecture
+- `main` → canonical architecture (SSG feature-complete)
 - `develop` → integration branch
 
 ### Variant Branches
-- `arch-ssg`
-- `arch-ssr`
-- `infra-docker-compose`
-- `infra-k8s`
-- `auth-jwt`
+- `arch-ssg` → Symfony + Twig SSG (feature-complete → merge to main)
+- `arch-ssr` → Next.js SSR frontend (migrates from Twig)
+- `auth-jwt` → JWT authentication (rebased into SSR)
+- `infra-k8s` → Kubernetes deployment (branch from main)
+
+### Flow
+1. `arch-ssg` → develop → `main` (SSG feature-complete)
+2. `main` → `arch-ssr` (create SSR branch from main)
+3. `auth-jwt` → rebase into `arch-ssr` (JWT auth)
+4. `arch-ssr` → `main` (SSR merge)
+5. `main` → `infra-k8s` (Kubernetes variant)
 
 ### Rules
 - **Rebase** → architectural inheritance
@@ -142,6 +150,7 @@ Hybrid TDD strategy:
 - Sitemap generation
 - Cache warming
 - CDN-ready output
+- **Feature-complete before merging to main**
 
 ---
 
@@ -150,6 +159,7 @@ Hybrid TDD strategy:
 - Refresh tokens
 - Token rotation
 - Stateless security model
+- Sessions migrated to JWT for SSR compatibility
 
 ---
 
@@ -165,7 +175,7 @@ JWT branch is rebased into SSR branch.
 
 ### Phase 7 — Infrastructure
 - Docker Compose environment
-- Kubernetes manifests
+- Kubernetes manifests (branch from main)
 - Helm charts
 - Deployment automation
 
