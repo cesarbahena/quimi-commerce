@@ -38,13 +38,17 @@ This project is intentionally designed as an **architecture showcase** and **sys
 ## CI/CD Monitoring
 
 ### Trigger Rules
-- Push to `main`, `develop`, or branches matching `arch-*` triggers CI
-- Pull requests to `main` or `develop` trigger CI
+- **CI**: Push to `main`, `develop`, or branches matching `arch-*` triggers CI
+- **CI**: Pull requests to `main` or `develop` trigger CI
+- **CD**: Push to `main` or tags matching `v*` triggers CD
 
 ### Monitoring Commands
 ```bash
 # Check CI status for current branch
 gh run list --repo cesarbahena/quimi-commerce --branch arch-ssg --limit 5
+
+# Check CD status
+gh run list --repo cesarbahena/quimi-commerce --workflow=cd --limit 5
 
 # Check latest run details
 gh run view <run-id> --repo cesarbahena/quimi-commerce
@@ -54,7 +58,7 @@ gh run rerun <run-id> --failed --repo cesarbahena/quimi-commerce
 ```
 
 ### Monitoring URLs
-- **GitHub Actions**: https://github.com/cesarbahena/quimi-commerce/actions  
+- **GitHub Actions**: https://github.com/cesarbahena/quimi-commerce/actions
 
 ### Local CI Testing (Required Before Push)
 Run these commands locally before every push to replicate CI environment:
@@ -82,7 +86,23 @@ vendor/bin/phpunit --testsuite=integration --no-coverage
 - PHP 8.3+ with extensions: mbstring, pdo_pgsql, bcmath
 - Composer
 - PostgreSQL (for integration tests)
-- Redis (for integration tests)  
+- Redis (for integration tests)
+
+### Local Docker Build Testing (Recommended Before CD Push)
+Test Docker builds locally before pushing to main:
+
+```bash
+# Build backend
+docker build -t backend:test -f backend/Dockerfile backend/
+
+# Build frontend
+docker build -t frontend:test -f frontend/twig/Dockerfile frontend/twig/
+```
+
+### CD Requirements
+- **Lock files must be tracked**: `composer.lock` and `package-lock.json` must be in git
+- **No cache on first run**: First CD run will be slow; subsequent runs use cache
+- **Images pushed to**: `ghcr.io/cesarbahena/quimi-commerce/backend` and `ghcr.io/cesarbahena/quimi-commerce/frontend-twig`  
 
 ---
 
