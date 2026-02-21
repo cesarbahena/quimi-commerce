@@ -1,0 +1,325 @@
+# AGENTS.md
+
+## Project Purpose
+This repository is a **production-grade architecture prototype** designed to demonstrate senior-level system design, engineering practices, and DevOps maturity for a Symfony-based full‑stack e‑commerce platform.
+
+The objective is not feature completeness, but **engineering quality**, **architecture clarity**, and **process excellence**:
+- Domain‑driven design
+- Clean architecture
+- Test‑first development
+- CI/CD‑first development
+- Infrastructure as code
+- Architectural variants
+- Trade‑off documentation
+- Production‑grade standards
+
+This project is intentionally designed as an **architecture showcase** and **system design artifact** for technical interviews and senior engineering evaluation.
+
+---
+
+## Core Principles
+
+1. CI/CD is created before features  
+2. Tests are written before business logic  
+3. Architecture precedes implementation  
+4. Domain logic is isolated from frameworks  
+5. Infrastructure is code, not configuration  
+6. Variants are branches, not forks  
+7. Rebase is used for architectural inheritance  
+8. Merge is used for stabilization  
+9. Monorepo governance, multi‑image runtime  
+10. Quality gates are mandatory, not optional  
+
+---
+
+## Repository Model
+
+### Monorepo Governance
+Single repository with multiple independent runtime images.
+
+### Runtime Isolation
+Each component is an independent container image:
+- Symfony API
+- Symfony workers
+- Symfony SSG frontend
+- Next.js SSR frontend
+- Reverse proxy (nginx)
+
+Monorepo = governance and CI/CD  
+Containers = runtime isolation and scalability  
+
+---
+
+## Architecture Variants
+
+### Rendering Variants
+- **SSG**: Symfony backend + Symfony Twig frontend (static export)
+- **SSR**: Symfony backend + Next.js frontend (server-side rendering)
+
+### Infrastructure Variants
+- Docker Compose
+- Kubernetes
+
+Resulting valid system configurations:
+1. Symfony SSG + Docker Compose
+2. Symfony SSG + Kubernetes
+3. Symfony API + Next.js SSR + Docker Compose
+4. Symfony API + Next.js SSR + Kubernetes
+
+---
+
+## Branch Strategy
+
+Branches represent **architectural decisions**, not features.
+
+### Core Branches
+- `main` → canonical architecture
+- `develop` → integration branch
+
+### Variant Branches
+- `arch-ssg`
+- `arch-ssr`
+- `infra-docker-compose`
+- `infra-k8s`
+- `auth-jwt`
+
+### Rules
+- **Rebase** → architectural inheritance
+- **Merge** → stabilization
+- No long‑living feature branches
+- No duplicated implementations
+- No forked logic
+
+---
+
+## Development Order
+
+### Phase 1 — CI/CD First
+- GitHub Actions pipelines
+- Linting
+- Static analysis
+- Test runners
+- Build pipelines
+- Security scans
+
+No feature development before CI exists.
+
+---
+
+### Phase 2 — Test First
+Hybrid TDD strategy:
+
+| Layer | Strategy |
+|------|--------|
+| Domain | TDD |
+| Validation | TDD |
+| Value Objects | TDD |
+| Services | TDD |
+| External Adapters | TDD |
+| Controllers | Test-after |
+| UI | Test-after |
+| Infra | Test-after |
+
+---
+
+### Phase 3 — Backend Core
+- Symfony skeleton
+- Clean Architecture layering
+- Domain model
+- Validation model
+- Error model
+- External API abstraction
+- Async processing
+- Logging
+- Health checks
+
+---
+
+### Phase 4 — SSG Variant
+- Twig frontend
+- SSR controllers
+- Static export pipeline
+- Sitemap generation
+- Cache warming
+- CDN-ready output
+
+---
+
+### Phase 5 — Auth Variant
+- JWT authentication
+- Refresh tokens
+- Token rotation
+- Stateless security model
+
+---
+
+### Phase 6 — SSR Variant
+- Next.js frontend
+- API integration
+- Server-side rendering
+- Frontend decoupling
+
+JWT branch is rebased into SSR branch.
+
+---
+
+### Phase 7 — Infrastructure
+- Docker Compose environment
+- Kubernetes manifests
+- Helm charts
+- Deployment automation
+
+---
+
+## CI/CD Policy
+
+### CI Pipelines
+- Lint
+- Static analysis
+- Unit tests
+- Integration tests
+- Coverage
+- Build
+- Security scanning
+- Image scanning
+
+### CD Pipelines
+- Multi‑image build
+- Registry push
+- Environment deploy
+- Rollout validation
+
+### Path‑based builds
+- backend/** → backend image
+- frontend/twig/** → SSG image
+- frontend/nextjs/** → SSR image
+- infra/** → deployment pipelines
+
+---
+
+## Docker Image Standards
+
+### General Rules
+- Multi‑stage builds only
+- No build tools in runtime images
+- Non‑root users
+- Minimal base images
+- Deterministic builds
+- Immutable tags
+- No secrets in images
+- Config via env only
+- Health checks mandatory
+- Graceful shutdown support
+
+### Security
+- Image scanning
+- Dependency scanning
+- SBOM generation
+- Minimal attack surface
+- Least‑privilege execution
+
+---
+
+## Testing Strategy
+
+### Backend
+- Unit tests (Domain)
+- Integration tests (API)
+- Contract tests (External APIs)
+- Async flow tests
+- DB transaction isolation
+
+### Frontend
+- Unit tests
+- Integration tests
+- E2E tests
+
+### Quality Gates
+- Coverage thresholds
+- Static analysis levels
+- Lint enforcement
+- Architecture rule enforcement
+
+---
+
+## Validation Architecture
+
+- Frontend structural validation
+- Backend domain validation
+- Value objects
+- External API validation
+- Error abstraction
+- User‑friendly error mapping
+- Async verification flows
+
+---
+
+## Observability
+
+- Structured logging
+- Correlation IDs
+- Metrics endpoint
+- Health endpoints
+- Error tracking integration
+- Audit logs
+- RFC validation logs
+
+---
+
+## Documentation Rules
+
+All architecture decisions must be documented in `/docs`:
+- System design
+- Trade‑offs
+- Variant comparisons
+- Security model
+- CI/CD model
+- Infra model
+- Testing model
+
+---
+
+## Commit Conventions
+
+Conventional commits:
+
+- feat:
+- fix:
+- test:
+- ci:
+- chore:
+- docs:
+- refactor:
+
+Architecture‑level commits only.
+
+---
+
+## Engineering Quality Gates
+
+A change cannot be merged if:
+- CI fails
+- Tests fail
+- Coverage drops
+- Static analysis fails
+- Security scan fails
+- Architecture rules fail
+
+---
+
+## Engineering Philosophy
+
+This project is built to demonstrate:
+
+- Architectural thinking
+- Production realism
+- System design maturity
+- Engineering governance
+- Quality‑first development
+- Process discipline
+- DevOps integration
+- Operational thinking
+
+This is not a demo app.  
+This is a **system design artifact**.
+
