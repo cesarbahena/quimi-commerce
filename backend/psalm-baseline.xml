@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="6.4.1@09a200c15910905ddc49e5edd37b73f9c78f7580">
+  <file src="src/Domain/Entity/Product.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[equals]]></code>
+      <code><![CDATA[getDescription]]></code>
+      <code><![CDATA[getId]]></code>
+      <code><![CDATA[getName]]></code>
+      <code><![CDATA[getPrice]]></code>
+      <code><![CDATA[getSku]]></code>
+      <code><![CDATA[getStockQuantity]]></code>
+      <code><![CDATA[isActive]]></code>
+      <code><![CDATA[isInStock]]></code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Domain/ValueObject/Money.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[add]]></code>
