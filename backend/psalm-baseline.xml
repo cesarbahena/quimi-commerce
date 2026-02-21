@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="6.4.1@09a200c15910905ddc49e5edd37b73f9c78f7580">
+  <file src="src/Presentation/Health/HealthController.php">
+    <UnusedClass>
+      <code><![CDATA[HealthController]]></code>
+    </UnusedClass>
+  </file>
+</files>

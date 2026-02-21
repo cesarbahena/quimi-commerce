@@ -1,0 +1,9 @@
+controllers:
+    resource:
+        path: ../../src/Presentation
+        namespace: QuimiCommerce\Presentation
+    type: attribute
+
+kernel:
+    resource: QuimiCommerce\Kernel
+    type: attribute

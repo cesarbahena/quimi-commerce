@@ -3,14 +3,15 @@
 namespace QuimiCommerce\Presentation\Health;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[AsController]
 class HealthController
 {
     #[Route('/health', name: 'health_check', methods: ['GET'])]
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(): JsonResponse
     {
         return new JsonResponse([
             'status' => 'ok',

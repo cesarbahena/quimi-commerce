@@ -247,8 +247,5 @@ jobs:
       - name: Run Composer Security Check
         run: composer audit --no-interaction
 
-      - name: Run Security Advisories Checker
-        uses: symfonycorp/security-checker-action@v2
-
       - name: Run PHPStan Security
         run: vendor/bin/phpstan analyse --level=max --memory-limit=1G --no-progress

@@ -1,3 +1,0 @@
-quimi_commerce_health:
-    path: /health
-    controller: QuimiCommerce\Presentation\Health\HealthController::liveness
