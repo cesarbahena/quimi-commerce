@@ -60,27 +60,37 @@ gh run rerun <run-id> --failed --repo cesarbahena/quimi-commerce
 ### Monitoring URLs
 - **GitHub Actions**: https://github.com/cesarbahena/quimi-commerce/actions
 
-### Local CI Testing (Required Before Push)
-Run these commands locally before every push to replicate CI environment:
+### Local CI Testing (MANDATORY Before Every Push)
+Run these commands locally **before every single push** to replicate CI environment exactly:
 
 ```bash
-# Lint
-cd backend && composer install --prefer-dist --no-interaction
-vendor/bin/php-cs-fixer fix --dry-run --diff
+# ALWAYS run from backend directory
+cd backend
 
-# Static Analysis
+# 1. Install dependencies
+composer install --prefer-dist --no-interaction
+
+# 2. Lint (must pass - fixes code style)
+vendor/bin/php-cs-fixer fix --dry-run --diff
+# If issues found, run: vendor/bin/php-cs-fixer fix
+
+# 3. Static Analysis (must pass)
 vendor/bin/phpstan analyse --level=6 --no-progress
 vendor/bin/psalm
 
-# Security
+# 4. Security Check (must pass)
 composer audit --abandoned=ignore
 
-# Unit Tests (no coverage - requires xdebug/pcov)
+# 5. Unit Tests (must pass)
 vendor/bin/phpunit --testsuite=unit --no-coverage
 
-# Integration Tests (requires postgres + redis)
+# 6. Integration Tests (if applicable)
 vendor/bin/phpunit --testsuite=integration --no-coverage
 ```
+
+**🚨 CRITICAL: NEVER push without running ALL local CI checks first!**
+**🚨 CI will fail if local checks don't pass!**
+**🚨 PHP version in CI may differ - CI uses PHP 8.3.30, local may have 8.3.6**
 
 **Required tools for local testing:**
 - PHP 8.3+ with extensions: mbstring, pdo_pgsql, bcmath

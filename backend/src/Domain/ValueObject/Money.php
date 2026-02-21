@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace QuimiCommerce\Domain\ValueObject;
 
-use Stringable;
-
-final class Money implements Stringable
+final class Money implements \Stringable
 {
     public function __construct(
         private readonly int $amount,
@@ -67,7 +65,7 @@ final class Money implements Stringable
 
     public function isZero(): bool
     {
-        return $this->amount === 0;
+        return 0 === $this->amount;
     }
 
     public function isPositive(): bool
