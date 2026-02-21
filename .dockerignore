@@ -1,0 +1,12 @@
+# Git
+.git/
+
+# CI/CD
+.github/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
