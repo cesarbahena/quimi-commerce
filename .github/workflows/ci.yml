@@ -41,8 +41,17 @@ jobs:
       - name: Run PHP CS Fixer
         run: vendor/bin/php-cs-fixer fix --dry-run --diff
 
-      - name: Run ESLint (if frontend exists)
-        if: exists('frontend/twig')
+      - name: Check if Twig frontend exists
+        id: check-frontend
+        run: |
+          if [ -d "frontend/twig" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run ESLint
+        if: steps.check-frontend.outputs.exists == 'true'
         run: |
           cd frontend/twig
           npm ci
