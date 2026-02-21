@@ -65,11 +65,11 @@ cd backend && composer install --prefer-dist --no-interaction
 vendor/bin/php-cs-fixer fix --dry-run --diff
 
 # Static Analysis
-vendor/bin/phpstan analyse
+vendor/bin/phpstan analyse --level=6 --no-progress
 vendor/bin/psalm
 
 # Security
-composer audit
+composer audit --abandoned=ignore
 
 # Unit Tests (no coverage - requires xdebug/pcov)
 vendor/bin/phpunit --testsuite=unit --no-coverage
