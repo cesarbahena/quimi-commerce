@@ -3,7 +3,6 @@
   <file src="src/Domain/Entity/Category.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
-      <code><![CDATA[equals]]></code>
       <code><![CDATA[getDescription]]></code>
       <code><![CDATA[getId]]></code>
       <code><![CDATA[getName]]></code>
@@ -16,7 +15,6 @@
   <file src="src/Domain/Entity/Product.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
-      <code><![CDATA[equals]]></code>
       <code><![CDATA[getDescription]]></code>
       <code><![CDATA[getId]]></code>
       <code><![CDATA[getName]]></code>
@@ -25,6 +23,14 @@
       <code><![CDATA[getStockQuantity]]></code>
       <code><![CDATA[isActive]]></code>
       <code><![CDATA[isInStock]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Domain/Entity/ProductCategory.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[equals]]></code>
+      <code><![CDATA[getCategory]]></code>
+      <code><![CDATA[getProduct]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Domain/ValueObject/Money.php">
