@@ -48,7 +48,7 @@ jobs:
         with:
           context: ./backend
           push: true
-          pull: true
+          no-cache: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           target: runtime
@@ -90,7 +90,7 @@ jobs:
         with:
           context: ./frontend/twig
           push: true
-          pull: true
+          no-cache: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           target: runtime
