@@ -31,6 +31,58 @@ This project is intentionally designed as an **architecture showcase** and **sys
 10. Quality gates are mandatory, not optional  
 11. **SEO is critically important** — no shortcuts on search optimization
 12. **No shortcuts** — production-grade quality from day one  
+13. **Never proceed after any push until CI passes** — CI is the backbone of this project
+
+---
+
+## CI/CD Monitoring
+
+### Trigger Rules
+- Push to `main`, `develop`, or branches matching `arch-*` triggers CI
+- Pull requests to `main` or `develop` trigger CI
+
+### Monitoring Commands
+```bash
+# Check CI status for current branch
+gh run list --repo cesarbahena/quimi-commerce --branch arch-ssg --limit 5
+
+# Check latest run details
+gh run view <run-id> --repo cesarbahena/quimi-commerce
+
+# Rerun failed jobs
+gh run rerun <run-id> --failed --repo cesarbahena/quimi-commerce
+```
+
+### Monitoring URLs
+- **GitHub Actions**: https://github.com/cesarbahena/quimi-commerce/actions  
+
+### Local CI Testing (Required Before Push)
+Run these commands locally before every push to replicate CI environment:
+
+```bash
+# Lint
+cd backend && composer install --prefer-dist --no-interaction
+vendor/bin/php-cs-fixer fix --dry-run --diff
+
+# Static Analysis
+vendor/bin/phpstan analyse
+vendor/bin/psalm
+
+# Security
+composer audit
+
+# Unit Tests (no coverage - requires xdebug/pcov)
+vendor/bin/phpunit --testsuite=unit --no-coverage
+
+# Integration Tests (requires postgres + redis)
+vendor/bin/phpunit --testsuite=integration --no-coverage
+```
+
+**Required tools for local testing:**
+- PHP 8.3+ with extensions: mbstring, pdo_pgsql, bcmath
+- Composer
+- PostgreSQL (for integration tests)
+- Redis (for integration tests)  
 
 ---
 
@@ -302,18 +354,6 @@ Conventional commits:
 - refactor:
 
 Architecture‑level commits only.
-
----
-
-## Engineering Quality Gates
-
-A change cannot be merged if:
-- CI fails
-- Tests fail
-- Coverage drops
-- Static analysis fails
-- Security scan fails
-- Architecture rules fail
 
 ---
 
