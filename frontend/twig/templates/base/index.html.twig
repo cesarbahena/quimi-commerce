@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Quimi Commerce{% endblock %}</title>
+    <meta name="description" content="{% block description %}E-commerce de productos químicos{% endblock %}">
+    <link rel="icon" type="image/svg+xml" href="/build/images/favicon.svg">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/main.css') }}">
+    {% endblock %}
+    {% block javascripts %}
+        <script src="{{ asset('build/app.js') }}" defer></script>
+    {% endblock %}
+</head>
+<body>
+    <header class="header">
+        <div class="container header__inner">
+            <a href="/" class="header__logo">Quimi Commerce</a>
+            <nav class="header__nav">
+                <a href="{{ path('home') }}">Inicio</a>
+                <a href="{{ path('catalog') }}">Catálogo</a>
+                <a href="{{ path('cart') }}">Carrito</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; {{ 'now'|date('Y') }} Quimi Commerce. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

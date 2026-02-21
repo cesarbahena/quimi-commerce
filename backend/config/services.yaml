@@ -1,0 +1,21 @@
+parameters:
+    env(APP_SECRET): ''
+    env(APP_ENV): dev
+    env(APP_DEBUG): 1
+    env(DATABASE_URL): ''
+    env(REDIS_URL): ''
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    QuimiCommerce\:
+        resource: '../src/'
+        exclude:
+            - '../src/Kernel.php'
+            - '../src/KernelTrait.php'
+
+    _instanceof:
+        Symfony\Component\EventDispatcher\EventSubscriberInterface:
+            tags: [kernel.event_subscriber]

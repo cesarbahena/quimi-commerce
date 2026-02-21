@@ -1,0 +1,25 @@
+FROM postgres:16-alpine
+
+LABEL maintainer="engineering@quimi-commerce.com"
+LABEL description="PostgreSQL database for Quimi Commerce"
+
+ENV POSTGRES_USER=app \
+    POSTGRES_PASSWORD=changeme \
+    POSTGRES_DB=quimi_commerce
+
+RUN apk add --no-cache \
+        dumb-init \
+        curl \
+    && rm -rf /var/cache/apk/*
+
+COPY docker-entrypoint-initdb.d/ /docker-entrypoint-initdb.d/
+
+USER postgres
+
+HEALTHCHECK --interval=10s --timeout=5s --start-period=10s --retries=5 \
+    CMD pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}
+
+EXPOSE 5432
+
+ENTRYPOINT ["dumb-init", "docker-entrypoint.sh"]
+CMD ["postgres"]

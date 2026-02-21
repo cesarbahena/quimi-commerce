@@ -1,0 +1,28 @@
+{% extends 'base/index.html.twig' %}
+
+{% block title %}Inicio - Quimi Commerce{% endblock %}
+
+{% block body %}
+    <section class="hero">
+        <h1 class="hero__title">Bienvenido a Quimi Commerce</h1>
+        <p class="hero__subtitle">Tu proveedor de confianza para productos químicos de calidad</p>
+        <a href="{{ path('catalog') }}" class="btn btn-primary">Ver Catálogo</a>
+    </section>
+
+    <section class="features">
+        <div class="features__grid">
+            <div class="feature">
+                <h3>Calidad Garantizada</h3>
+                <p>Todos nuestros productos cumplen con los más altos estándares de calidad.</p>
+            </div>
+            <div class="feature">
+                <h3>Envío Rápido</h3>
+                <p>Entregamos en todo el país dentro de las 48 horas hábiles.</p>
+            </div>
+            <div class="feature">
+                <h3>Soporte Técnico</h3>
+                <p>Nuestro equipo de expertos está disponible para asesorarte.</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}

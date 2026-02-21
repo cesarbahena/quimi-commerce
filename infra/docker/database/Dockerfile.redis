@@ -1,0 +1,20 @@
+FROM redis:7-alpine
+
+LABEL maintainer="engineering@quimi-commerce.com"
+LABEL description="Redis cache for Quimi Commerce"
+
+RUN apk add --no-cache \
+        dumb-init \
+        curl \
+    && rm -rf /var/cache/apk/*
+
+COPY redis.conf /usr/local/etc/redis/redis.conf
+
+USER redis
+
+HEALTHCHECK --interval=10s --timeout=5s --start-period=5s --retries=5 \
+    CMD redis-cli ping
+
+EXPOSE 6379
+
+ENTRYPOINT ["dumb-init", "redis-server", "/usr/local/etc/redis/redis.conf"]

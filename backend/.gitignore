@@ -1,0 +1,41 @@
+.env.local
+.env.*.local
+vendor/
+node_modules/
+.phpunit.cache/
+coverage/
+var/
+!var/.gitkeep
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+*.iml
+composer.lock
+npm-debug.log
+yarn-error.log
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+/.phpunit.cache/
+###< phpunit/phpunit ###
